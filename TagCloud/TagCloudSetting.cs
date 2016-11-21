@@ -20,10 +20,10 @@
         /// <summary>
         /// Initializes a new instance of the TagCloudSetting class. 
         /// </summary>
-        public TagCloudSetting()
+        public TagCloudSetting(bool lemmatize = true)
         {
             this.WordFinder = defaultWordFinder;
-            this.Lemmatizer = defaultLemmatizer;
+            this.Lemmatizer = lemmatize ? (ILemmatizer) defaultLemmatizer : new NullLemmatizer();
             this.StopWords = defaultStopWords;
             this.MaxCloudSize = 100;
             this.NumCategories = 10;
@@ -37,7 +37,7 @@
         /// <summary>
         /// Gets or sets the lemmatizer used to derive the roots of words.
         /// </summary>
-        public Lemmatizer Lemmatizer { get; set; }
+        public ILemmatizer Lemmatizer { get; set; }
 
         /// <summary>
         /// Gets or sets the set of word roots (e.g. "be" rather than "am") to 
